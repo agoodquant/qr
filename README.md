@@ -20,7 +20,7 @@
  
  integrate with other open source Q libraries: qml, log4q, kdbR </br>
  
- Check sampleUsage.q on how to usse it
+ Check sampleUsage.q for quick guide.
  
  Disclaimer
  ===========
