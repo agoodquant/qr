@@ -1,12 +1,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 //logger.q - contains log functions
-///
+//           extended from https://github.com/prodrive11/log4q
 //
 
 \d .qr
 fm:"%c\t[%p]:H=%h:PID[%i]:%d:%t:%f: %m\r\n";
 sev:snk:`SILENT`DEBUG`INFO`WARN`ERROR`FATAL!();
-a:{$[1<count x;[h[x 0]::x 1;snk[y],::x 0];[h[x]::{x@y};snk[y],::x;]];};
+setLog:{$[1<count x;[h[x 0]::x 1;snk[y],::x 0];[h[x]::{x@y};snk[y],::x;]];};
 r:{snk::@[snk;y;except;x];};
 h:m:()!();
 m["c"]:{[x;y]string x};
@@ -22,6 +22,12 @@ sevl:$[`log in key .Q.opt .z.x;first `$upper .Q.opt[.z.x]`log;`INFO];
 (` sv' ``qr,/:`$(),/:each[first;string lower key snk]) set' {{@[.qr.h[x]x;y;{[h;e]'"qr - ", string[h]," exception:",e}[x]]}[;l[x] p y]@/:snk[x]}@/: key[snk];
 n:(::);
 sev:key[snk]!((s;d;i;w;e;f);(n;d;i;w;e;f);(n;n;i;w;e;f);(n;n;n;w;e;f);(n;n;n;n;e;f);(n;n;n;n;n;f));
-a[1;`SILENT`DEBUG`INFO`WARN];a[2;`ERROR`FATAL];
+setLog[1;`SILENT`DEBUG`INFO`WARN];a[2;`ERROR`FATAL];
 \d .
-`.qr.silient`.qr.debug`.qr.console`.qr.warn`.qr.error`.qr.fatal set' .qr.sev .qr.sevl;
+
+.qr.setSev:{
+    .qr.sevl:x;
+    `.qr.silient`.qr.debug`.qr.console`.qr.warn`.qr.error`.qr.fatal set' .qr.sev .qr.sevl;
+    };
+
+.qr.setSev[`INFO];
