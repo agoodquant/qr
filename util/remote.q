@@ -4,34 +4,23 @@
 //
 
 .qr.remote.rpc:{
-    x:.qr.toSymbol x;
-    if[-11h <> type x;
-        .qr.throw ".qr.remote.rpc: incorrect connection string", .qr.toString x;
-        ];
+    x:.qr.type.toSymbol x;
     h:hopen hsym x;
-    res:@[h;y;{[h;err] hclose h; .qr.throw "rpc exeuction err:", .qr.toString err;}[h]];
+    res:@[h;y;{[h;err] hclose h; .qr.throw "rpc exeuction err:", .qr.type.toString err;}[h]];
     hclose h;
     res};
 
 .qr.remote.arpc:{
-    x:.qr.toSymbol x;
-    if[-11h <> type x;
-        .qr.throw ".qr.remote.arpc: incorrect connection string", .qr.toString x;
-        ];
-
+    x:.qr.type.toSymbol x;
     @[neg .qr.remote.priv.rpcCache x;y;
-        {.qr.throw ".qr.remote.arpc: rpc exeuction err:", .qr.toString x;}
+        {.qr.throw ".qr.remote.arpc: rpc exeuction err:", .qr.type.toString x;}
         ];
     };
 
 .qr.remote.lrpc:{
-    x:.qr.toSymbol x;
-    if[-11h <> type x;
-        .qr.throw ".qr.remote.arpc: incorrect connection string", .qr.toString x;
-        ];
-
+    x:.qr.type.toSymbol x;
     @[.qr.remote.priv.rpcCache x;y;
-        {.qr.throw ".qr.remote.arpc: rpc exeuction err:", .qr.toString x;}
+        {.qr.throw ".qr.remote.arpc: rpc exeuction err:", .qr.type.toString x;}
         ];
     };
 
@@ -40,7 +29,7 @@
     };
 
 .qr.remote.close:{
-    x:.qr.toSymbol x;
+    x:.qr.type.toSymbol x;
     h:exec first handle from .qr.remote.priv.cache where server = x;
     if[not null h;
         delete from `.qr.remote.priv.cache where server = x;

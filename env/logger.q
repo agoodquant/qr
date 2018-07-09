@@ -22,7 +22,8 @@ sevl:$[`log in key .Q.opt .z.x;first `$upper .Q.opt[.z.x]`log;`INFO];
 (` sv' ``qr,/:`$(),/:each[first;string lower key snk]) set' {{@[.qr.h[x]x;y;{[h;e]'"qr - ", string[h]," exception:",e}[x]]}[;l[x] p y]@/:snk[x]}@/: key[snk];
 n:(::);
 sev:key[snk]!((s;d;i;w;e;f);(n;d;i;w;e;f);(n;n;i;w;e;f);(n;n;n;w;e;f);(n;n;n;n;e;f);(n;n;n;n;n;f));
-setLog[1;`SILENT`DEBUG`INFO`WARN];a[2;`ERROR`FATAL];
+setLog[1;`SILENT`DEBUG`INFO`WARN];
+setLog[2;`ERROR`FATAL];
 \d .
 
 .qr.setSev:{

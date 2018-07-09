@@ -22,16 +22,16 @@
 //test exectrl.q
 .qr.trycatch[{x+y};(1;2);{'x}]
 .qr.trycatch[.qml.msvd;enlist (0 1 2f;-1 0 -3f;2 1 7f); {'x}]
-.qr.trycatch[{[x;y] '`hello};(1;2);{show "error catch: ", .qr.toString[x]}]
-.qr.trycatch[{'`error};enlist (::);{show "error catch: ", .qr.toString[x]}]
-.qr.trycatch[{[x] '`error};enlist 1;{show "error catch: ", .qr.toString[x]}]
+.qr.trycatch[{[x;y] '`hello};(1;2);{show "error catch: ", .qr.type.toString[x]}]
+.qr.trycatch[{'`error};enlist (::);{show "error catch: ", .qr.type.toString[x]}]
+.qr.trycatch[{[x] '`error};enlist 1;{show "error catch: ", .qr.type.toString[x]}]
 .qr.getFuncDef[`.qr.exist]
 .qr.trycatch[`.qr.exist;enlist `qr.exist;{'x}]
 .qr.getFuncDef[{'`error}]
 
 //test logger
-.qr.setSeverity[`INFO]
-.qr.setSeverity[`ERROR]
+.qr.setSev[`INFO]
+.qr.setSev[`ERROR]
 .qr.addLogHandle["C:/Users/user/Desktop/Document/dev/KDB+/log/qr/test.log";`SILENT`DEBUG`INFO];
 .qr.addLogHandle["C:/Users/user/Desktop/Document/dev/KDB+/log/qr/testErr.log";`WARN`ERROR`FATAL];
 .qr.setLogConsole[]
@@ -72,18 +72,18 @@
 .qr.R.get "split(M, col(M))"
 
 //test type.q
-.qr.toString[`hello]
-.qr.toString (`hello;`world)
-.qr.toSymbol ("hello";"world")
-.qr.mergeSym[`hello;`world]
-.qr.listTypes[]
-.qr.toBits[1]
-.qr.bitsTo["j"] .qr.toBits[1]
-.qr.toBytes each "hello"
-.qr.bytesTo["c"] each .qr.toBytes each "hello"
-.qr.bytesTo["j"] .qr.toBytes 123i
-.qr.toBase[2;(101b)]
-.qr.toBase[3;(1 2 1)]
+.qr.type.toString[`hello]
+.qr.type.toString (`hello;`world)
+.qr.type.toSymbol ("hello";"world")
+.qr.type.mergeSym[`hello;`world]
+.qr.type.list[]
+.qr.type.toBits[1]
+.qr.type.bitsTo["j"] .qr.type.toBits[1]
+.qr.type.toBytes each "hello"
+.qr.type.bytesTo["c"] each .qr.type.toBytes each "hello"
+.qr.type.bytesTo["j"] .qr.type.toBytes 123i
+.qr.type.toBase[2;(101b)]
+.qr.type.toBase[3;(1 2 1)]
 
 //test remote.q
 .qr.remote.rpc["localhost:26041"] "show `hello"
@@ -222,7 +222,7 @@ m:(1.1 2.1 3.1; 2.3 3.4 4.5; 5.6 7.8 9.8)
 inv m
 
 .qr.numeric.delta[{(x*x)-5*x};3;`central]
-.qr.numeric.secondOrderDiff[{(x*x)-5*x};3]
+.qr.numeric.convexity[{(x*x)-5*x};3]
 
 .qr.numeric.newton[{(x*x)-5*x};{(2*x)-5};100]
 .qr.numeric.newton[{(x*x)-5*x};.qr.numeric.delta[{(x*x)-5*x};;`central];100] // use numerical gradient
@@ -389,8 +389,8 @@ testFunc[2;3]
 testFunc2[2;3]
 
 .qr.qtracer.unwrapAll[]
-.qr.console "Stop tracing on " .qr.toString `testFunc
-.qr.isFunction eval `testFunc2
+.qr.console "Stop tracing on " .qr.type.toString `testFunc
+.qr.type.isFunc eval `testFunc2
 .qr.qtracer.wrap[`.qr];
 .qr.qtracer.wrap[`.qr];
 
@@ -609,12 +609,6 @@ lp:.tmp.lp
 count lp[`err]
 
 // test ip, integer programming and mixed integer programming
-.qr.isInteger[2.00001]
-.qr.isInteger[2.000000001]
-.qr.isInteger[2]
-.qr.isInteger[1.1]
-.qr.isInteger[`1.1]
-
 A:(1 1f;5 9f);
 c:(6 45f);
 b:(5 8f);

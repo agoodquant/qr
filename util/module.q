@@ -3,6 +3,7 @@
 ///
 //
 
+.qr.include[`util;"type.q"];
 .qr.include[`util;"dict.q"];
 .qr.include[`util;"list.q"];
 .qr.include[`util;"namespace.q"];

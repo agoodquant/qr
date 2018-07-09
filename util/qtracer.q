@@ -5,8 +5,8 @@
 
 
 .qr.qtracer.wrap:{[ns] TRACE_DEBUG:`disable;
-    if[not .qr.ns.isNamespace[ns] or .qr.isFunction[eval ns];
-        .qr.throw ".qr.qtracer.wrap:", (.qr.toString ns), " is not a valid namespace or function";
+    if[not .qr.ns.isNamespace[ns] or .qr.type.isFunc[eval ns];
+        .qr.throw ".qr.qtracer.wrap:", (.qr.type.toString ns), " is not a valid namespace or function";
         ];
 
     subspaces:.qr.ns.subspaceRecursive[ns];
@@ -15,8 +15,8 @@
 
 
 .qr.qtracer.unwrap:{[ns] TRACE_DEBUG:`disable;
-    if[not .qr.ns.isNamespace[ns] or .qr.isFunction[eval ns];
-        .qr.throw ".qr.qtracer.unwrap:", (.qr.toString ns), " is not a valid namespace or function";
+    if[not .qr.ns.isNamespace[ns] or .qr.type.isFunc[eval ns];
+        .qr.throw ".qr.qtracer.unwrap:", (.qr.type.toString ns), " is not a valid namespace or function";
         ];
 
     subspaces:.qr.ns.subspaceRecursive[ns];
@@ -29,15 +29,15 @@
     };
 
 .qr.qtracer.priv.wrapFunc:{[func] TRACE_DEBUG:`disable;
-    if[not .qr.isFunction eval func;
-        .qr.console "Skip tacing on ", (.qr.toString func), ", not a function";
+    if[not .qr.type.isFunc eval func;
+        .qr.console "Skip tacing on ", (.qr.type.toString func), ", not a function";
         :(::);
         ];
 
     funcMask:func;
     if[0 <> count select from .qr.qtracer.priv.functionShimed where func=funcMask;
         if[(eval func) ~ exec first shimFunc from .qr.qtracer.priv.functionShimed where func=funcMask;
-            .qr.console "Skip tacing on ", (.qr.toString func), ", already hooked";
+            .qr.console "Skip tacing on ", (.qr.type.toString func), ", already hooked";
             :(::);
             ];
         ];
@@ -46,11 +46,11 @@
     origFunc:.qr.getFuncDef[func];
 
     if[`TRACE_DEBUG in origFunc`locals;
-        .qr.console "Skip tacing on ", (.qr.toString func), ", TRACE_DEBUG flag is defined";
+        .qr.console "Skip tacing on ", (.qr.type.toString func), ", TRACE_DEBUG flag is defined";
         :(::);
         ];
 
-    origArgs:.qr.toString origFunc`params;
+    origArgs:.qr.type.toString origFunc`params;
     origImpl:origFunc`def;
     if[.z.K <= 3.3;
         origImpl:ssr[origImpl;"\n";funcLine];
@@ -61,7 +61,7 @@
 
     modifiedImpl:"{[", modifiedArgs, "]", funcLine;
     modifiedImpl:modifiedImpl, "(", (";" sv {x, ":", y}'[cacheArgs;origArgs]), ");", funcLine;
-    modifiedImpl:modifiedImpl, ".qr.qtracer.priv.enter[`", (.qr.toString func), "];", funcLine;
+    modifiedImpl:modifiedImpl, ".qr.qtracer.priv.enter[`", (.qr.type.toString func), "];", funcLine;
 
     protectedArgs:$[0=count origArgs; "enlist (::)"; $[1=count origArgs; "enlist ", modifiedArgs; "(", modifiedArgs, ")"]];
     modifiedImpl:modifiedImpl, "res:.[", origImpl, ";", protectedArgs, "; .qr.qtracer.priv.throw];", funcLine;
@@ -70,16 +70,16 @@
     .tmp.modifiedImpl:modifiedImpl;
     shimFunc:parse modifiedImpl;
 
-    .qr.console "Start tracing on ", .qr.toString func;
+    .qr.console "Start tracing on ", .qr.type.toString func;
     .qr.shimming.priv.shim[func;shimFunc;`.qr.qtracer.priv.functionShimed];
     };
 
 .qr.qtracer.priv.unwrapFunc:{[func] TRACE_DEBUG:`disable;
-    if[not .qr.isFunction eval func;
+    if[not .qr.type.isFunc eval func;
         :(::);
         ];
 
-    .qr.console "Stop tracing on ", .qr.toString func;
+    .qr.console "Stop tracing on ", .qr.type.toString func;
     .qr.shimming.priv.unshim[func;`.qr.qtracer.priv.functionShimed];
     };
 
@@ -100,7 +100,7 @@
 .qr.qtracer.priv.throw:{ TRACE_DEBUG:`disable;
     if[0 <> count .qr.qtracer.priv.callStack;
         lastFuncName:string last .qr.qtracer.priv.callStack;
-        .qr.console "qtracer:", ((0 | 4 * neg 1 - count .qr.qtracer.priv.callStack)#""), "^---", lastFuncName, "***error: ", .qr.toString x;
+        .qr.console "qtracer:", ((0 | 4 * neg 1 - count .qr.qtracer.priv.callStack)#""), "^---", lastFuncName, "***error: ", .qr.type.toString x;
         .qr.qtracer.priv.callStack:();
         ];
 

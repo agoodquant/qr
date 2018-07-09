@@ -34,7 +34,7 @@
 .qr.shimming.priv.unshim:{[funcName;shimTbl] TRACE_DEBUG:`disable;
     entry:select from (eval shimTbl) where func=funcName;
     if [0 = count entry;
-        .qr.throw ".qr.shimming.priv.unshim:", (.qr.toString funcName), " is not shimed.";
+        .qr.throw ".qr.shimming.priv.unshim:", (.qr.type.toString funcName), " is not shimed.";
         ];
 
     funcName set first entry`origFunc;

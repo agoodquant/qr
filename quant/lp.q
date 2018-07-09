@@ -39,8 +39,8 @@
 
     // setup intial lp
     m:til count A; n:til count first A;
-    y:.qr.toSymbol each "y",/: .qr.toString 1+m;
-    x:.qr.toSymbol each "x",/: .qr.toString 1+n;
+    y:.qr.type.toSymbol each "y",/: .qr.type.toString 1+m;
+    x:.qr.type.toSymbol each "x",/: .qr.type.toString 1+n;
     lp:`A`b`c`v`m`n`y`x`err!(A;b;c;0;m;n;y;x;`);
 
     // solve
@@ -88,8 +88,8 @@
 
     res:0!
         $[dir=`min;
-        .qr.tbl.lj[`y;([] y:.qr.toSymbol each "y",/: .qr.toString 1+lp[`m]; val:(count lp[`m])#0f);([] y:lp[`x]; val:lp[`c])];
-        .qr.tbl.lj[`x;([] x:.qr.toSymbol each "x",/: .qr.toString 1+lp[`n]; val:(count lp[`n])#0f);([] x:lp[`y]; val:lp[`b])]
+        .qr.tbl.lj[`y;([] y:.qr.type.toSymbol each "y",/: .qr.type.toString 1+lp[`m]; val:(count lp[`m])#0f);([] y:lp[`x]; val:lp[`c])];
+        .qr.tbl.lj[`x;([] x:.qr.type.toSymbol each "x",/: .qr.type.toString 1+lp[`n]; val:(count lp[`n])#0f);([] x:lp[`y]; val:lp[`b])]
         ];
 
     res:`v`x`err!(lp[`v]; res[`val]; `);

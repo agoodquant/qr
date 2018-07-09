@@ -4,10 +4,7 @@
 //
 
 .qr.tbl.isNonEmptyTbl:{[tbl]
-    if[not .qr.tbl.isKeyedTbl[tbl] | 98h=type tbl;
-        :0b;
-        ];
-    0<>count tbl
+    $[not .qr.tbl.isKeyedTbl[tbl] | 98h=type tbl; 0b; 0<>count tbl]
     };
 
 .qr.tbl.isKeyedTbl:{[tbl]
@@ -56,38 +53,9 @@
     exceptCols:exceptCols where not null exceptCols;
     colsToAppended:(cols tbl) except exceptCols;
     exceptColsList:raze {(enlist x)! enlist x} each exceptCols;
-    appendedColList:raze {[prefix;col](enlist .qr.toSymbol raze .qr.toString prefix, col)!enlist col}[prefix] each colsToAppended;
+    appendedColList:raze {[prefix;col](enlist .qr.type.toSymbol raze .qr.type.toString prefix, col)!enlist col}[prefix] each colsToAppended;
     transformColList:exceptColsList, appendedColList;
     ?[tbl;();0b;transformColList]
-    };
-
-.qr.tbl.crossTab:{[t;b;p;v;f]
-    invalidCol:p where "s" <> exec t from 0!meta t where c in p;
-    if[not 0 = count invalidCol;
-        .qr.throw ".qr.tbl.crossTab:", " and " sv .qr.toString p, " type are not symbol";
-        ];
-    vTransform:qr.util.tbl.priv.symPivotMerge .qr.toSymbol[f] cross v;
-    fTransform:raze v {(y;x)}\:/: f;
-    crossTab:0!?[t;();(b,p)!(b,p);vTransform!fTransform];
-    pivotColumns:raze .qr.tbl.priv.crossSinglePivot[crossTab;b;vTransform] each p;
-    crossTab:flip (flip ?[crossTab;();1b;b!b]), pivotColumns;
-    crossTab};
-
-.qr.tbl.priv.crossSinglePivot:{[crossTab;b;vTransform;p]
-    pivots:distinct crossTab[p];
-    nPivots:count pivots;
-    crossTab:0!?[crossTab;();b!b;(p, vTransform)!(p, vTransform)];
-    transformFunc:(';{x ^ y!z} pivots!nPivots#0n);
-    fTransformPivot:{(x;y;z)}[transformFunc;p] each vTransform;
-    crossTab:![crossTab;();0b;vTransform!fTransformPivot];
-    vTransformPivot:qr.util.tbl.priv.symPivotMerge vTransform cross .qr.toSymbol .qr.toString pivots;
-    pivotColumns:(,\) each crossTab[vTransform];
-    pivotSlices:nPivots cut vTransformPivot;
-    (,/) {[t;p] flip ?[t;();0b; p!cols[t]]}'[pivotColumns;pivotSlices]
-    };
-
-qr.util.tbl.priv.symPivotMerge:{
-    .qr.toSymbol {"By" sv x} each .qr.toString x
     };
 
 .qr.tbl.splitCol:{[t;c;delim]

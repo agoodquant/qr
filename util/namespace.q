@@ -16,7 +16,7 @@
         .qr.throw ".qr.ns.subspace: not a valid namespace";
         ];
 
-    .qr.toSymbol (.qr.toString[ns], ".") ,/: .qr.toString each (key ns) where not null key ns
+    .qr.type.toSymbol (.qr.type.toString[ns], ".") ,/: .qr.type.toString each (key ns) where not null key ns
     };
 
 .qr.ns.subspaceRecursive:{[ns] TRACE_DEBUG:`disable;

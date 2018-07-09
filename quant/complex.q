@@ -8,15 +8,7 @@
     };
 
 .qr.complex.isComplex:{
-    if[99h <> type x;
-        :0b;
-        ];
-
-    if[not (`real`imaginary) ~ key x;
-        :0b;
-        ];
-
-    1b
+    $[99h <> type x; 0b; not (`real`imaginary) ~ key x; 0b; 1b]
     };
 
 .qr.complex.toComplex:{[x]

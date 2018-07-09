@@ -100,7 +100,7 @@
         ]
     };
 
-.qr.numeric.secondOrderDiff:{[func;x]
+.qr.numeric.convexity:{[func;x]
     step:0.0001 & abs 0.0001 * x;
     (func[x+step] + func[x-step] - 2 * func[x]) % step * step
     };

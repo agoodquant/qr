@@ -30,7 +30,7 @@
     };
 
 // binomial pdf generator
-.qr.quatn.dist.priv.bin:{[n;p;x]
+.qr.dist.priv.bin:{[n;p;x]
     m:max x;
     X:1 + til m;
     N:reverse X+(n-m);

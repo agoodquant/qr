@@ -32,7 +32,7 @@
             .qr.mem.priv.cache:update priority:0.1^priority*0.99 from .qr.mem.priv.cache;
                 ];
 
-        .qr.console ".qr.mem.memoize---memoize...", .qr.toString func;
+        .qr.console ".qr.mem.memoize---memoize...", .qr.type.toString func;
         `.qr.mem.priv.cache insert (hashKey; func; args; cacheSize; 1.0f; enlist cacheRes);
         :cacheRes;
         ];
@@ -97,7 +97,7 @@
     };
 
 .qr.mem.priv.getHashKey:{[func;args]
-    .qr.toSymbol raze .qr.toString md5 (.qr.toString .qr.getFuncDef[func]`def), .qr.raze.razeAll {.qr.toString .Q.s x} each args //string presentation
+    .qr.type.toSymbol raze .qr.type.toString md5 (.qr.type.toString .qr.getFuncDef[func]`def), .qr.raze.razeAll {.qr.type.toString .Q.s x} each args //string presentation
     };
 
 .qr.mem.init[];

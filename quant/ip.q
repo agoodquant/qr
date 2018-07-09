@@ -43,7 +43,7 @@
     queue:queue where not res`foamed;
     res:select from res where not foamed;
 
-    res:update branchChoice:{x and not .qr.isInteger y}[iconstr] each x from res;
+    res:update branchChoice:{x and not .qr.ip.priv.isEpsilon y}[iconstr] each x from res;
     res:update branch:{first where x} each branchChoice,
                branchValue:{first y where x}'[branchChoice][x] from res;
 
@@ -139,4 +139,12 @@
     toBeFix:til count notFix;
     trials:fixing ,/: {x[y]:not x[y];x}[notFix] each til count notFix;
     ([] x:trials; leaf:((count[trials] - 1)#0b), 1b; fix:1+fix+toBeFix)
+    };
+
+.qr.ip.priv.isEpsilon:{
+    if[not (abs type x) in (6 7 8 9h);
+        :0b;
+        ];
+
+    1e-16 >= x mod 1
     };

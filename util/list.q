@@ -47,3 +47,7 @@
     increment:(end-start) % nbin;
     start + (end-start) & increment * 1 + til nbin
     };
+
+.qr.list.isList:{
+    0<=type x
+    };

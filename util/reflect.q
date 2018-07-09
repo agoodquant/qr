@@ -5,24 +5,24 @@
 
 .qr.ns.ls:{[ns]
     if[-11h<>type ns;
-        .qr.throw ".qr.ns.ls: invalid namespace. ", (.qr.toString ns), "must be symbol";
+        .qr.throw ".qr.ns.ls: invalid namespace. ", (.qr.type.toString ns), "must be symbol";
         ];
 
     subspaces:.qr.ns.subspace[ns];
 
     ([] namespace:(count subspaces)#ns;
-        subspace:{.qr.toSymbol "." sv ("." vs x _.qr.toString y)}[1+count .qr.toString ns] each subspaces;
+        subspace:{.qr.type.toSymbol "." sv ("." vs x _.qr.type.toString y)}[1+count .qr.type.toString ns] each subspaces;
         val:.qr.ns.priv.getDef each subspaces)
     };
 
 .qr.ns.lsr:{[ns]
     if[-11h<>type ns;
-        .qr.throw ".qr.ns.lsr: nvalid namespace. ", (.qr.toString ns), "must be symbol";
+        .qr.throw ".qr.ns.lsr: nvalid namespace. ", (.qr.type.toString ns), "must be symbol";
         ];
 
     subspaces:.qr.ns.subspaceRecursive[ns];
     ([] namespace:(count subspaces)#ns;
-        subspace:{.qr.toSymbol "." sv ("." vs x _.qr.toString y)}[1+count .qr.toString ns] each subspaces;
+        subspace:{.qr.type.toSymbol "." sv ("." vs x _.qr.type.toString y)}[1+count .qr.type.toString ns] each subspaces;
         val:.qr.ns.priv.getDef each subspaces)
     };
 
