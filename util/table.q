@@ -4,13 +4,11 @@
 //
 
 .qr.tbl.isNonEmptyTbl:{[tbl]
-    $[not .qr.tbl.isKeyedTbl[tbl] | 98h=type tbl; 0b; 0<>count tbl]
+    $[not .qr.tbl.isKeyed[tbl] | 98h=type tbl; 0b; 0<>count tbl]
     };
 
-.qr.tbl.isKeyedTbl:{[tbl]
-    $[99h=type tbl;
-        $[98h=type value tbl;1b;0b];
-        0b]
+.qr.tbl.isKeyed:{[tbl]
+    $[99h=type tbl; $[98h=type value tbl;1b;0b]; 0b]
     };
 
 .qr.tbl.lj:{[colsToJoin;lTbl;rTbl]
@@ -49,13 +47,9 @@
     };
 
 .qr.tbl.prepends:{[exceptCols;prefix;tbl]
-    exceptCols:.qr.list.enlist exceptCols;
-    exceptCols:exceptCols where not null exceptCols;
     colsToAppended:(cols tbl) except exceptCols;
-    exceptColsList:raze {(enlist x)! enlist x} each exceptCols;
-    appendedColList:raze {[prefix;col](enlist .qr.type.toSymbol raze .qr.type.toString prefix, col)!enlist col}[prefix] each colsToAppended;
-    transformColList:exceptColsList, appendedColList;
-    ?[tbl;();0b;transformColList]
+    appendedColList:.qr.type.mergeSym[prefix] each colsToAppended;
+    (cols[tbl] except appendedColList) xcol appendedColList xcol colsToAppended xcols tbl
     };
 
 .qr.tbl.splitCol:{[t;c;delim]
