@@ -4,6 +4,11 @@
  ===========
  qinfra: https://github.com/agoodquant/qinfra
  
+ Dependency
+ ===========
+ All modules are controlled by a depdency file called "depends.txt". Dependending on the locations of your modules,</br>
+ you would need to edit this file most likely. By default, it is Q drive in windows. 
+ 
  Modules
  ===========
  shimming: modify function behavior during execution</br>
@@ -24,4 +29,4 @@
  
  Disclaimer
  ===========
- this is still in progress. As some functions are vectorized while others are not. Use upon your own judgement.
+ This is still in progress. As some functions are vectorized while others are not. Use upon your own judgement.
