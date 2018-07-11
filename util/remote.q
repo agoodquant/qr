@@ -35,7 +35,7 @@
         delete from `.qr.remote.priv.cache where server = x;
         ];
 
-    if[h in .z.W;
+    if[h in key .z.W;
         hclose h;
         ];
     };
@@ -54,7 +54,7 @@
     h:exec first handle from .qr.remote.priv.cache where server = x;
     $[null h; // new connection
         [h:hopen hsym x; `.qr.remote.priv.cache insert (h;x);h];
-        not h in .z.W; // handle was closed
+        not h in key .z.W; // handle was closed
         [h:hopen hsym x; update handle:h from `.qr.remote.priv.cache where server = x;h];
         h]
     };
