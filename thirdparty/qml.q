@@ -4,7 +4,7 @@
 ///
 //
 
-{x[0] set @[(`$getenv[`QHOME], "qml") 2:;1_x;
+{x[0] set @[(`$getenv[`QHOME], "/qml") 2:;1_x;
     {'x}"qml: loading ",string[x 1],"(): ",]} each flip
     {(`$".qml." ,/: string r;`$"qml_",/:string r:raze x;where count each x)}
 
