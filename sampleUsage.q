@@ -85,6 +85,17 @@
 .qr.type.toBase[2;(101b)]
 .qr.type.toBase[3;(1 2 1)]
 
+//test dict.q
+tbl:([] a:1 2 3; b:`a`b`c)
+dict:`a`b!(1 2 3; `a`b`c)
+dict2:`a`b!1 2
+.qr.dict.isDict[dict]
+.qr.dict.isDict[`a xkey tbl]
+.qr.dict.isNonKeyedTblDict[`a xkey tbl]
+.qr.dict.isColDict each (flip tbl;dict;dict2)
+.qr.tbl.isNonEmptyTbl each (tbl;delete from tbl)
+.qr.tbl.isKeyed[`a xkey tbl]
+
 //test remote.q
 .qr.remote.rpc["localhost:26041"] "show `hello"
 .qr.remote.arpc["localhost:26041"] "show `hello"

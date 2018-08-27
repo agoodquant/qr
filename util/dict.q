@@ -4,12 +4,12 @@
 //
 
 .qr.dict.isDict:{[dict]
-    $[99h=type dict; 1b; 0b]
+    99h=type dict
     };
 
 .qr.dict.isNonKeyedTblDict:{[dict]
     $[.qr.dict.isDict[dict];
-        98h=type value dict;
+        98h<>type value dict;
         0b]
     };
 

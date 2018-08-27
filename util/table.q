@@ -8,7 +8,7 @@
     };
 
 .qr.tbl.isKeyed:{[tbl]
-    $[99h=type tbl; $[98h=type value tbl;1b;0b]; 0b]
+    $[.qr.dict.isDict[tbl]; 98h=type value tbl; 0b]
     };
 
 .qr.tbl.lj:{[colsToJoin;lTbl;rTbl]
