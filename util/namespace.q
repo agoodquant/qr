@@ -4,11 +4,9 @@
 //
 
 .qr.ns.isNamespace:{[ns] TRACE_DEBUG:`disable;
-    if[ns=`;
-        :1b;
-        ];
-
-    @[{$[99h=type value x; ` in key x; 0b]}; ns; 0b]
+    $[ns=`; 1b;
+        @[{$[99h=type value x; ` in key x; 0b]}; ns; 0b]
+        ]
     };
 
 .qr.ns.subspace:{[ns] TRACE_DEBUG:`disable;

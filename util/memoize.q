@@ -28,7 +28,7 @@
             .qr.mem.adjust[cacheSize];
             ]
 
-        if[.qr.tbl.isNonEmptyTbl .qr.mem.priv.cache;
+        if[.qr.tbl.isNonEmpty .qr.mem.priv.cache;
             .qr.mem.priv.cache:update priority:0.1^priority*0.99 from .qr.mem.priv.cache;
                 ];
 

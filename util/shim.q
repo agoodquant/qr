@@ -19,7 +19,6 @@
     .qr.shimming.priv.unshimAll `.qr.shimming.priv.shimed
     };
 
-
 .qr.shimming.priv.shimed:([] func:`$(); shimFunc:(); origFunc:());
 
 .qr.shimming.priv.shim:{[funcName;funcImpl;shimTbl] TRACE_DEBUG:`disable;

@@ -34,7 +34,7 @@
 		99h <> typeFunc;
 		funcEval;
         .qr.ns.isNamespace func;
-			({`$"." sv 2_"." vs string x}  each ns)!.z.s each ns:.qr.ns.subspaceRecursive func;
+			({`$"." sv x _"." vs string y}[count "." vs string func]  each ns)!.z.s each ns:.qr.ns.subspaceRecursive func;
 		funcEval
         ]
     };

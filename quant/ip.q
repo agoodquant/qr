@@ -16,7 +16,6 @@
     };
 
 .qr.mip.priv.bfs:{[b;A;c;xconstr;iconstr;dir;qRes]
-    .tmp.qRes:qRes;
     res:qRes`res; queue:qRes`queue;
     if[0 = count queue;
         :qRes;

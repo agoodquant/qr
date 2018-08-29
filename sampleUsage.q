@@ -103,12 +103,17 @@ dict2:`a`b!1 2
 .qr.remote.list[]
 .qr.remote.close "localhost:26041"
 
+//test namespace.q
+.qr.ns.isNamespace[`.qr]
+.qr.ns.subspace[`.qr]
+.qr.ns.subspaceRecursive[`.qr]
+
 //test reflection.q
 .qr.ns.ls[`.qr]
 .qr.ns.lsr[`.qr]
 .qr.ns.ls[`.qr]
 .qr.ns.ls[`.qr.complex]
-exec val from .qr.ns.lsr[`.qr] where (namespace=`.qr) and subspace=`quant.dist.exp.pdf
+exec val from .qr.ns.lsr[`.qr] where (namespace=`.qr) and subspace=`dist.exp.pdf
 
 //test memoize.q
 squareMatrix:{[n]
@@ -170,8 +175,8 @@ flip (enlist `x)!enlist .qr.rng.normBM[0;1;.qr.rng.halton[2];.qr.rng.halton[3];5
 
 flip (enlist `x)!enlist .qr.rng.normBMP[0;1;`.qr.rng.rand;`.qr.rng.rand;5000000];
 
-.qr.rng.normBM[0;1;`.qr.rng.rand;`.qr.rng.rand;50000];
-.qr.rng.normICDF[0;1;`.qr.rng.rand;50000];
+.qr.rng.normBM[0;1;`.qr.rng.rand;`.qr.rng.rand;50000]
+.qr.rng.normICDF[0;1;`.qr.rng.rand;50000]
 
 // test probdist.q
 ([] poissonDist:.qr.dist.poisson.cdf[10] each til 25)
@@ -374,7 +379,7 @@ test4:.qr.tbl.prepends[`Continent;`qa;test2]
 .qr.tbl.lj[`Continent;test3;test4]
 test:([] x:("a|b|c";"c|e|f"); y: 12 20f; z:("hello";"world"))
 test:([] x:("a|b|c";"a|b|c"); y: 12 20f; z:("hello";"world"))
-.qr.tbl.splitCol[test;`x;"|"]
+.qr.tbl.splitCol[test;`x;"|"] 
 
 // test shim.q
 testFunc:{x+y}
@@ -392,19 +397,11 @@ testFunc:{testFunc2[x;y]}
 testFunc2:{x+y}
 testFunc2:{[x;y] .qr.throw "a bug :(";};
 
-.qr.qtracer.priv.wrapFunc[`testFunc]
-testFunc[2;3]
-.qr.qtracer.priv.unwrapFunc[`testFunc]
-
-.qr.qtracer.priv.wrapFunc[`testFunc2]
-testFunc2[2;3]
-
 .qr.qtracer.unwrapAll[]
-.qr.console "Stop tracing on " .qr.type.toString `testFunc
-.qr.type.isFunc eval `testFunc2
+.qr.qtracer.wrap[`.qr.dist];
+.qr.qtracer.wrap[`.qr.remote];
 .qr.qtracer.wrap[`.qr];
-.qr.qtracer.wrap[`.qr];
-
+.qr.qtracer.unwrap[`.qr];
 .qr.dist.normal.cdf[0;1;0]
 
 // test raze.q
@@ -412,12 +409,10 @@ testFunc2[2;3]
 
 tbl1:([] a:1+til 3; b:10*1+til 3; c:`a`b`c)
 tbl2:([] a:4+til 3; b:10*4+til 3; c:`d`e`f)
-
 .qr.raze.razeTable[(tbl1;`c`a`b xcols tbl2; `b`a`c xcols tbl1)]
 
 dict1:(`a`b`c)!(1;2;3)
 dict2:(`c`b`a)!(10;20;30)
-
 .qr.raze.razeDict[(dict1;dict2)]
 
  //test math.q

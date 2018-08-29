@@ -25,7 +25,7 @@
 
 .qr.qtracer.unwrapAll:{ TRACE_DEBUG:`disable;
     .qr.console "Stop tracing on everything";
-    .qr.shimming.pirv.unshimAll `.qr.qtracer.priv.functionShimed;
+    .qr.shimming.priv.unshimAll `.qr.qtracer.priv.functionShimed;
     };
 
 .qr.qtracer.priv.wrapFunc:{[func] TRACE_DEBUG:`disable;
@@ -67,7 +67,6 @@
     modifiedImpl:modifiedImpl, "res:.[", origImpl, ";", protectedArgs, "; .qr.qtracer.priv.throw];", funcLine;
     modifiedImpl:modifiedImpl, ".qr.qtracer.priv.exit[];", funcLine;
     modifiedImpl:modifiedImpl, "res}";
-    .tmp.modifiedImpl:modifiedImpl;
     shimFunc:parse modifiedImpl;
 
     .qr.console "Start tracing on ", .qr.type.toString func;
@@ -75,7 +74,8 @@
     };
 
 .qr.qtracer.priv.unwrapFunc:{[func] TRACE_DEBUG:`disable;
-    if[not .qr.type.isFunc eval func;
+    funcMask:func;
+    if[0 = exec count i from .qr.qtracer.priv.functionShimed where func=funcMask;;
         :(::);
         ];
 
