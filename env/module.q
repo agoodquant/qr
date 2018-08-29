@@ -3,7 +3,7 @@
 ///
 //
 
-.qr.include[`env;"logger.q"];
-.qr.include[`env;"exectrl.q"];
-.qr.include[`env;"param.q"];
-.qr.include[`env;"host.q"];
+.qinfra.include[`env;"logger.q"];
+.qinfra.include[`env;"exectrl.q"];
+.qinfra.include[`env;"param.q"];
+.qinfra.include[`env;"host.q"];

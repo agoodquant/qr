@@ -3,5 +3,5 @@
 ///
 //
 
-.qr.include[`thirdparty;"kdbR.q"];
-.qr.include[`thirdparty;"qml.q"];
+.qinfra.include[`thirdparty;"kdbR.q"];
+.qinfra.include[`thirdparty;"qml.q"];

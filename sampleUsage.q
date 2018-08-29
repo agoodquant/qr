@@ -1,17 +1,17 @@
 // dependency
-.qr.cleanDep[];
-.qr.loadDep[`env;"Q:/qr/env"];
-.qr.loadDep[`quant;"Q:/qr/quant"];
-.qr.listDep[]
+.qinfra.cleanDep[];
+.qinfra.loadDep[`env;"Q:/qr/env"];
+.qinfra.loadDep[`quant;"Q:/qr/quant"];
+.qinfra.listDep[]
 
 // load project
-.qr.load["env"];
-.qr.load["thirdparty"];
-.qr.load["quant"];
-.qr.load["util"];
-.qr.include["quant"; "random.q"];
-.qr.reload[];
-.qr.listModule[]
+.qinfra.load["env"];
+.qinfra.load["thirdparty"];
+.qinfra.load["quant"];
+.qinfra.load["util"];
+.qinfra.include["quant"; "random.q"];
+.qinfra.reload[];
+.qinfra.listModule[]
 
 //test host.q
 .qr.host[]
@@ -379,7 +379,7 @@ test4:.qr.tbl.prepends[`Continent;`qa;test2]
 .qr.tbl.lj[`Continent;test3;test4]
 test:([] x:("a|b|c";"c|e|f"); y: 12 20f; z:("hello";"world"))
 test:([] x:("a|b|c";"a|b|c"); y: 12 20f; z:("hello";"world"))
-.qr.tbl.splitCol[test;`x;"|"] 
+.qr.tbl.splitCol[test;`x;"|"]
 
 // test shim.q
 testFunc:{x+y}
