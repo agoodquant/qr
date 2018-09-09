@@ -3,5 +3,7 @@
 ///
 //
 
+.qinfra.import[`.qml];
+
 .qinfra.include[`thirdparty;"kdbR.q"];
 .qinfra.include[`thirdparty;"qml.q"];

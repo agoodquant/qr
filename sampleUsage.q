@@ -10,16 +10,17 @@
 .qinfra.load["quant"];
 .qinfra.load["util"];
 .qinfra.include["quant"; "random.q"];
+.qinfra.clean[`.qr];
 .qinfra.reload[];
 .qinfra.listModule[]
 
-//test host.q
+// test host.q
 .qr.host[]
 .qr.ipAddr[]
 .qr.pid[]
 .qr.pwd[]
 
-//test exectrl.q
+// test exectrl.q
 .qr.trycatch[{x+y};(1;2);{'x}]
 .qr.trycatch[.qml.msvd;enlist (0 1 2f;-1 0 -3f;2 1 7f); {'x}]
 .qr.trycatch[{[x;y] '`hello};(1;2);{show "error catch: ", .qr.type.toString[x]}]
@@ -29,7 +30,7 @@
 .qr.trycatch[`.qr.exist;enlist `qr.exist;{'x}]
 .qr.getFuncDef[{'`error}]
 
-//test logger
+// test logger.q
 .qr.setSev[`INFO]
 .qr.setSev[`ERROR]
 .qr.addLogHandle["C:/Users/user/Desktop/Document/dev/KDB+/log/qr/test.log";`SILENT`DEBUG`INFO];
@@ -49,7 +50,7 @@
 .qr.listParam[]
 .qr.getParam[`test]
 
-//test R
+// test R
 .qr.R.open[]
 .qr.R.eval "a=array(1:24,c(2,3,4))"
 .qr.R.get "dim(a)"
@@ -96,26 +97,26 @@ dict2:`a`b!1 2
 .qr.tbl.isNonEmptyTbl each (tbl;delete from tbl)
 .qr.tbl.isKeyed[`a xkey tbl]
 
-//test remote.q
+// test remote.q
 .qr.remote.rpc["localhost:26041"] "show `hello"
 .qr.remote.arpc["localhost:26041"] "show `hello"
 .qr.remote.lrpc["localhost:26041"] "show `hello"
 .qr.remote.list[]
 .qr.remote.close "localhost:26041"
 
-//test namespace.q
+// test namespace.q
 .qr.ns.isNamespace[`.qr]
 .qr.ns.subspace[`.qr]
 .qr.ns.subspaceRecursive[`.qr]
 
-//test reflection.q
+// test reflection.q
 .qr.ns.ls[`.qr]
 .qr.ns.lsr[`.qr]
 .qr.ns.ls[`.qr]
 .qr.ns.ls[`.qr.complex]
 exec val from .qr.ns.lsr[`.qr] where (namespace=`.qr) and subspace=`dist.exp.pdf
 
-//test memoize.q
+// test memoize.q
 squareMatrix:{[n]
     (n;n)#til n*n
     };
@@ -136,7 +137,7 @@ exec sum size from .qr.mem.list[]
 .qr.mem.memoize[`squareMatrix2] each 1+til 20;
 .qr.mem.memoize[`squareMatrix] 10
 
-//test stat.q
+// test stat.q
 seq1:til 10
 seq2:reverse til 10
 
