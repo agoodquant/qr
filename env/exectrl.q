@@ -4,12 +4,18 @@
 
 
 .qr.trycatch:{[func;params;err]
-    trap:@[{[func] $[1 = count .qr.getFuncDef[func][`params]; @; .]};
-            func;
-            {$[(x~"sealed") or x ~ "projection on sealed"; .; .qr.throw x]}
+    trap:$[.qr.isSealed func; .;
+            $[1 = count .qr.getFuncDef[func][`params]; @; .]
             ];
 
     trap[$[-11h=type func; eval func;func]; params; err]
+    };
+
+.qr.isSealed:{[func]
+    typeFunc:type func;
+    $[112h=typeFunc; 1b;
+        $[104h=typeFunc; string[eval func] like "code*"; 0b]
+        ]
     };
 
 .qr.getFuncDef:{[func]
