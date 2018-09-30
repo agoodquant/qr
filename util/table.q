@@ -48,7 +48,7 @@
 
 .qr.tbl.prepends:{[exceptCols;prefix;tbl]
     colsToAppended:(cols tbl) except exceptCols;
-    appendedColList:.qr.type.mergeSym[prefix] each colsToAppended;
+    appendedColList:.qr.type.mergeSym each prefix ,/: colsToAppended;
     $[null exceptCols; 0#`; exceptCols] xcols appendedColList xcol colsToAppended xcols tbl
     };
 

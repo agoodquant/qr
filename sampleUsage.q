@@ -76,7 +76,7 @@
 .qr.type.toString[`hello]
 .qr.type.toString (`hello;`world)
 .qr.type.toSymbol ("hello";"world")
-.qr.type.mergeSym[`hello;`world]
+.qr.type.mergeSym[`hello`world]
 .qr.type.list[]
 .qr.type.toBits[1]
 .qr.type.bitsTo["j"] .qr.type.toBits[1]

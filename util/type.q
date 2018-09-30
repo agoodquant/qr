@@ -40,7 +40,7 @@
     };
 
 .qr.type.mergeSym:{
-    .qr.type.toSymbol .qr.type.toString[x], .qr.type.toString[y]
+    .qr.type.toSymbol .qr.raze.razeAll .qr.type.toString x
     };
 
 .qr.type.init:{
