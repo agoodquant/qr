@@ -6,8 +6,8 @@
  
  Dependency
  ===========
- All modules are controlled by a depdency file called "depends.txt". Dependending on the locations of your modules,</br>
- you would need to edit this file most likely. By default, it is Q drive in windows. 
+ All modules are controlled by a depdency file called "depends.txt". Dependending on the location of your module,</br>
+ you would need to edit this file. By default, it is Q drive in windows. 
  
  Modules
  ===========
