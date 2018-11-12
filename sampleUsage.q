@@ -163,7 +163,8 @@ avg normSeq
 ([] x:.qr.rng.uniform[`.qr.rng.rand;3000];
     y:.qr.rng.uniform[`.qr.rng.rand;3000])
 
-.qr.rng.uniform[.qr.rng.rand;1]
+.qr.rng.uniform[.qr.rng.rand;1000]
+.qr.rng.bin[.qr.rng.rand;10;0.3;1000]
 
 ([] x:.qr.rng.uniform[`.qr.rng.halton[2];3000];
     y:.qr.rng.uniform[`.qr.rng.halton[17];3000])
@@ -178,6 +179,8 @@ flip (enlist `x)!enlist .qr.rng.normBMP[0;1;`.qr.rng.rand;`.qr.rng.rand;5000000]
 
 .qr.rng.normBM[0;1;`.qr.rng.rand;`.qr.rng.rand;50000]
 .qr.rng.normICDF[0;1;`.qr.rng.rand;50000]
+
+.qr.rng.cdfStep[.qr.dist.bin.cdf[10;0.3] til 11;.qr.rng.rand;1000]
 
 // test probdist.q
 ([] poissonDist:.qr.dist.poisson.cdf[10] each til 25)

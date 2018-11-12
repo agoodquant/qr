@@ -79,7 +79,6 @@
     logC:.qr.complex.number[0; 2 * .qr.math.pi % n];
     logCl:.qr.complex.multiply[logC] each til n;
 
-
     Cl:.qr.complex.exp each logCl;
     ClNeg:.qr.complex.reciprocal each Cl;
 

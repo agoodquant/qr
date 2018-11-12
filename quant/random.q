@@ -3,11 +3,13 @@
 ///
 //
 
-.qr.rng.uniform:{[rng;n]
-    if[-11h=type rng;
-        :rng n;
-        ];
+/// discrete
+.qr.rng.bin:{[rng;m;p;n]
+    sum each m cut 0.3 > rng m*n
+    };
 
+/// continuous
+.qr.rng.uniform:{[rng;n]
     rng[n]
     };
 
@@ -48,8 +50,14 @@
     exp .qr.rng.norm[u;sig;rng1;rng2;n]
     };
 
+/// generalized method
+.qr.rng.cdfStep:{[cdf;rng;n]
+    cdf binr rng n
+    };
+
+/// random number generator
 .qr.rng.rand:{[n]
-    rand each n#1.0
+    n?1.0
     };
 
 .qr.rng.halton:{[b;n]
@@ -59,25 +67,26 @@
     n#haltonSeq
     };
 
-.qr.rng.grayCode:{[k]
-    if[k <= neg 1 - count .qr.rng.grayCodeList;
-        :.qr.rng.grayCodeList[k];
-        ];
 
-    oldList:.qr.rng.grayCodeList;
-    newList: reverse oldList;
-    oldList:0b,/:oldList;
-    newList:1b,/:newList;
-    .qr.rng.grayCodeList:oldList, newList;
-    .qr.rng.grayCode k
-    };
+/ .qr.rng.grayCode:{[k]
+/     if[k <= neg 1 - count .qr.rng.grayCodeList;
+/         :.qr.rng.grayCodeList[k];
+/         ];
 
-.qr.rng.grayCodeList:(enlist enlist 0b), enlist enlist 1b;
+/     oldList:.qr.rng.grayCodeList;
+/     newList: reverse oldList;
+/     oldList:0b,/:oldList;
+/     newList:1b,/:newList;
+/     .qr.rng.grayCodeList:oldList, newList;
+/     .qr.rng.grayCode k
+/     };
 
-.qr.rng.grayCodeTil:{[k]
-    if[k > neg 1 - count .qr.rng.grayCodeList;
-        .qr.rng.grayCode[k];
-        ];
+/ .qr.rng.grayCodeList:(enlist enlist 0b), enlist enlist 1b;
 
-    k#.qr.rng.grayCodeList
-    };
+/ .qr.rng.grayCodeTil:{[k]
+/     if[k > neg 1 - count .qr.rng.grayCodeList;
+/         .qr.rng.grayCode[k];
+/         ];
+
+/     k#.qr.rng.grayCodeList
+/     };
