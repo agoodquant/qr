@@ -8,15 +8,15 @@
 //discrete
 ///////////////////////////////
 
-.qr.dist.poisson.pdf:{[lambda;x]
-    .qr.dist.priv.poisson[lambda;x] x
+.qr.dist.poi.pdf:{[lambda;x]
+    .qr.dist.priv.poi[lambda;x] x
     };
 
-.qr.dist.poisson.cdf:{[lambda;x]
-    (sums .qr.dist.priv.poisson[lambda;x]) x
+.qr.dist.poi.cdf:{[lambda;x]
+    (sums .qr.dist.priv.poi[lambda;x]) x
     };
 
-.qr.dist.priv.poisson:{[lambda;x]
+.qr.dist.priv.poi:{[lambda;x]
     m:max x;
     exp[neg lambda] * 1.0, prds (m#lambda) % 1 + til m
     };
@@ -58,7 +58,7 @@
 .qr.dist.geo.pdf:.qr.dist.negBin.pdf[1];
 .qr.dist.geo.cdf:.qr.dist.negBin.cdf[1];
 
-.qr.dist.poissonBin.pdf:{[p;k]
+.qr.dist.poiBin.pdf:{[p;k]
     n:1+count p;
     // compute Cl = exp (i*2*pi / (n+1))
     logC:.qr.complex.number[0; 2 * .qr.math.pi % n];
@@ -73,7 +73,7 @@
     res[`real] % n
     };
 
-.qr.dist.poissonBin.cdf:{[p;k]
+.qr.dist.poiBin.cdf:{[p;k]
     n:1+count p;
     // compute Cl = exp (i*2*pi / (n+1))
     logC:.qr.complex.number[0; 2 * .qr.math.pi % n];

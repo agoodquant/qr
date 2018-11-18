@@ -4,8 +4,21 @@
 //
 
 /// discrete
-.qr.rng.bin:{[rng;m;p;n]
-    sum each m cut 0.3 > rng m*n
+
+.qr.rng.bernoulli:{[p;rng;n]
+    p > rng n
+    };
+
+.qr.rng.bin:{[m;p;rng;n]
+    sum each m cut .qr.rng.bernoulli[p;rng;m*n]
+    };
+
+.qr.rng.geo:{[p;rng;n]
+    floor log[rng[n]] % log p
+    };
+
+.qr.rng.negBin:{[r;p;rng;n]
+    sum each r cut .qr.rng.geo[p;rng;n*r]
     };
 
 /// continuous

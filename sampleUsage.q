@@ -160,12 +160,14 @@ avg normSeq
 .qr.stat.kurt[normSeq]
 
 // test rng.q
+.qr.rng.bin[10;0.3;.qr.rng.rand;1000]
+.qr.rng.geo[0.3;.qr.rng.rand;1000]
+.qr.rng.negBin[3;0.3;.qr.rng.rand;1000]
+
 ([] x:.qr.rng.uniform[`.qr.rng.rand;3000];
     y:.qr.rng.uniform[`.qr.rng.rand;3000])
 
 .qr.rng.uniform[.qr.rng.rand;1000]
-.qr.rng.bin[.qr.rng.rand;10;0.3;1000]
-
 ([] x:.qr.rng.uniform[`.qr.rng.halton[2];3000];
     y:.qr.rng.uniform[`.qr.rng.halton[17];3000])
 
@@ -183,7 +185,7 @@ flip (enlist `x)!enlist .qr.rng.normBMP[0;1;`.qr.rng.rand;`.qr.rng.rand;5000000]
 .qr.rng.cdfStep[.qr.dist.bin.cdf[10;0.3] til 11;.qr.rng.rand;1000]
 
 // test probdist.q
-([] poissonDist:.qr.dist.poisson.cdf[10] each til 25)
+([] poissonDist:.qr.dist.poi.cdf[10] each til 25)
 ([] binDist:.qr.dist.bin.cdf[25;0.5] each til 26)
 
 .qr.dist.bin.pdf[1;0.5;1]
@@ -429,7 +431,6 @@ dict2:(`c`b`a)!(10;20;30)
 .qr.math.gamma[0.5]
 .qr.math.gamma[1.5]
 
-
 .qr.math.beta[1.5;0.5]
 .qr.math.betaIncomp[1.5;0.5;0.999]
 .qr.math.betaIncomp[1.5;0.5;0.01]
@@ -487,15 +488,14 @@ fourierX:.qr.complex.dft[x] each til count x
 .qr.complex.idft[fourierX] each til count fourierX
 
 ([] binomial:.qr.dist.bin.pdf[10;0.5] each til 11;
-    poissonBin:.qr.dist.poissonBin.pdf[10#0.5] each til 11)
+    poissonBin:.qr.dist.poiBin.pdf[10#0.5] each til 11)
 
 sum .qr.dist.bin.pdf[10;0.5] each til 5
-sum .qr.dist.poissonBin.pdf[10#0.5] each til 5
-.qr.dist.poissonBin.cdf[10#0.5;4]
+sum .qr.dist.poiBin.pdf[10#0.5] each til 5
+.qr.dist.poiBin.cdf[10#0.5;4]
 
 sum .qr.dist.bin.pdf[100;0.5] each til 51
-.qr.dist.poissonBin.cdf[100#0.5;50]
-
+.qr.dist.poiBin.cdf[100#0.5;50]
 
 // test mat.q
 .qr.mat.solve[(0 1 2f; -1 0 -3f; 2 1 7f);(3 -2 5f)]
