@@ -185,6 +185,36 @@ flip (enlist `x)!enlist .qr.rng.normBMP[0;1;`.qr.rng.rand;`.qr.rng.rand;5000000]
 
 .qr.rng.cdfStep[.qr.dist.bin.cdf[10;0.3] til 11;.qr.rng.rand;1000]
 
+avg .qr.rng.poi[3;.qr.rng.rand;1000000]
+var .qr.rng.poi[3;.qr.rng.rand;1000000]
+.qr.stat.skew[.qr.rng.poi[3;.qr.rng.rand;1000000]] // 1 % sqrt 3
+.qr.stat.kurt[.qr.rng.poi[3;.qr.rng.rand;1000000]] // 3 xexp -1
+
+avg .qr.rng.poi[80;.qr.rng.rand;1000000]
+var .qr.rng.poi[80;.qr.rng.rand;1000000]
+.qr.stat.skew[.qr.rng.poi[80;.qr.rng.rand;1000000]] // 1 % sqrt 80
+.qr.stat.kurt[.qr.rng.poi[80;.qr.rng.rand;1000000]] // 80 xexp -1
+
+avg .qr.rng.poi[500;.qr.rng.rand;1000000]
+var .qr.rng.poi[500;.qr.rng.rand;1000000]
+.qr.stat.skew[.qr.rng.poi[500;.qr.rng.rand;1000000]] // 1 % sqrt 500
+.qr.stat.kurt[.qr.rng.poi[500;.qr.rng.rand;1000000]] // 500 xexp -1
+
+avg .qr.rng.normICDF[0;1;.qr.rng.rand;1000000]
+var .qr.rng.normICDF[0;1;.qr.rng.rand;1000000]
+.qr.stat.skew[.qr.rng.normICDF[0;1;.qr.rng.rand;1000000]]
+.qr.stat.kurt[.qr.rng.normICDF[0;1;.qr.rng.rand;1000000]]
+
+avg .qr.rng.normBM[1;3;.qr.rng.rand;.qr.rng.rand;1000000]
+var .qr.rng.normBM[1;3;.qr.rng.rand;.qr.rng.rand;1000000]
+.qr.stat.skew[.qr.rng.normBM[1;3;.qr.rng.rand;.qr.rng.rand;1000000]]
+.qr.stat.kurt[.qr.rng.normBM[1;3;.qr.rng.rand;.qr.rng.rand;1000000]]
+
+avg .qr.rng.normBMP[1;3;.qr.rng.rand;.qr.rng.rand;1000000]
+var .qr.rng.normBMP[1;3;.qr.rng.rand;.qr.rng.rand;1000000]
+.qr.stat.skew[.qr.rng.normBMP[1;3;.qr.rng.rand;.qr.rng.rand;1000000]]
+.qr.stat.kurt[.qr.rng.normBMP[1;3;.qr.rng.rand;.qr.rng.rand;1000000]]
+
 // test probdist.q
 ([] poissonDist:.qr.dist.poi.cdf[10] each til 25)
 ([] binDist:.qr.dist.bin.cdf[25;0.5] each til 26)
