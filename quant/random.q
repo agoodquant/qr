@@ -23,7 +23,7 @@
 
 .qr.rng.poi:{[lambda;rng;n]
     trials:rng n;
-    $[lambda<=500;
+    $[lambda<=100;
         binr[sums {[lambda;x] x, last[x]*lambda % 1|count[x]}[lambda]/[{x > sum y}[max trials];exp neg lambda]; trials];
         0 | .qr.dist.normal.cdfInv[lambda;sqrt lambda;trials] - 0.5 // 0.5 is continous correction
         ]
@@ -63,8 +63,7 @@
     };
 
 .qr.rng.normICDF:{[u;sig;rng;n]
-    u:.qr.rng.uniform[rng;n];
-    u + sig * .qr.dist.stdNormal.cdfInv u
+    u + sig * .qr.dist.stdNormal.cdfInv rng n
     };
 
 .qr.rng.logNorm:{[u;sig;rng1;rng2;n]
