@@ -163,6 +163,7 @@ avg normSeq
 .qr.rng.bin[10;0.3;.qr.rng.rand;1000]
 .qr.rng.geo[0.3;.qr.rng.rand;1000]
 .qr.rng.negBin[3;0.3;.qr.rng.rand;1000]
+.qr.rng.poi[3;.qr.rng.rand;1000]
 
 ([] x:.qr.rng.uniform[`.qr.rng.rand;3000];
     y:.qr.rng.uniform[`.qr.rng.rand;3000])

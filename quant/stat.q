@@ -43,22 +43,18 @@
 .qr.stat.skew:{
     n:count x;
     meanX:avg x;
-    thirdMomX:sum xexp[(x-meanX);3];
-    stdErrX:.qr.stat.sampleVar[x];
+    unbias3M:(sum xexp[(x-meanX);3]) * n % (n-1) * (n-2);
+    varX:.qr.stat.sampleVar[x];
 
-    biasedSkewX:(thirdMomX % xexp[stdErrX;3]);
-    unbiasedSkewX:biasedSkewX * n % (n-1) * (n-2);
-    unbiasedSkewX
+    unbias3M % xexp[varX;1.5]
     };
 
 .qr.stat.kurt:{
     n:count x;
     meanX:avg x;
-    forthMomX:sum xexp[(x-meanX);4];
-    varX:.qr.stat.sampleVar[x];
-
-    biasedKurtX:forthMomX % xexp[varX;2];
-    unbiasedKurtX:(biasedKurtX * (n+1) * n % (n-1)*(n-2)*(n-3))-3*(n-1)*(n-1)%(n-2)*(n-3)
+    m4:avg xexp[(x-meanX);4];
+    m2:avg xexp[(x-meanX);2];
+    ((n-1) % (n-2) * n-3) * neg (3*n-1) - (n+1) * m4 % xexp[m2;2]
     };
 
 .qr.stat.ols:{

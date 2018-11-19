@@ -21,6 +21,14 @@
     sum each r cut .qr.rng.geo[p;rng;n*r]
     };
 
+.qr.rng.poi:{[lambda;rng;n]
+    trials:rng n;
+    $[lambda<=500;
+        binr[sums {[lambda;x] x, last[x]*lambda % 1|count[x]}[lambda]/[{x > sum y}[max trials];exp neg lambda]; trials];
+        0 | .qr.dist.normal.cdfInv[lambda;sqrt lambda;trials] - 0.5 // 0.5 is continous correction
+        ]
+    };
+
 /// continuous
 .qr.rng.uniform:{[rng;n]
     rng[n]
