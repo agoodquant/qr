@@ -59,8 +59,11 @@
 .qr.R.get "xyz"
 
 .qr.R.install["Matrix"];
+.qr.R.install["lpSolve"];
+.qr.R.install["dplyr"];
 .qr.R.include["Matrix"];
 .qr.R.include["lpSolve"];
+.qr.R.include["dplyr"];
 
 .qr.R.set["A";.qr.mat.rand[10;10;`.qr.rng.rand]];
 .qr.R.eval "M <- matrix(unlist(A), ncol=10, byrow=TRUE)";
