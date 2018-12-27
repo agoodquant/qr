@@ -4,7 +4,7 @@
 //
 
 \d .qr
-fm:"%c\t[%p]:H=%h:PID[%i]:%d:%t:%f: %m\r\n";
+fm:"%c\t[%p]:H=%h:PID[%i]:%d:%t: %m\r\n";
 sev:snk:`SILENT`DEBUG`INFO`WARN`ERROR`FATAL!();
 setLog:{TRACE_DEBUG:`disable; $[1<count x;[h[x 0]::x 1;snk[y],::x 0];[h[x]::{x@y};snk[y],::x;]];};
 r:{TRACE_DEBUG:`disable; snk::@[snk;y;except;x];};
@@ -28,7 +28,7 @@ setLog[2;`ERROR`FATAL];
 
 .qr.setSev:{ TRACE_DEBUG:`disable;
     .qr.sevl:x;
-    `.qr.silient`.qr.debug`.qr.console`.qr.warn`.qr.error`.qr.fatal set' .qr.sev .qr.sevl;
+    `.qr.silent`.qr.debug`.qr.console`.qr.warn`.qr.error`.qr.fatal set' .qr.sev .qr.sevl;
     };
 
 .qr.setSev[`INFO];

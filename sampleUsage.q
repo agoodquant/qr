@@ -14,6 +14,9 @@
 .qinfra.reload[];
 .qinfra.listModule[]
 
+test:2;
+.qinfra.clear[]; // clean up all global variables
+
 // test host.q
 .qr.host[]
 .qr.ipAddr[]
@@ -33,6 +36,7 @@
 // test logger.q
 .qr.setSev[`INFO]
 .qr.setSev[`ERROR]
+.qr.setSev[`SILENT]
 .qr.addLogHandle["C:/Users/user/Desktop/Document/dev/KDB+/log/qr/test.log";`SILENT`DEBUG`INFO];
 .qr.addLogHandle["C:/Users/user/Desktop/Document/dev/KDB+/log/qr/testErr.log";`WARN`ERROR`FATAL];
 .qr.setLogConsole[]
