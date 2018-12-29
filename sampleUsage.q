@@ -15,7 +15,9 @@
 .qinfra.listModule[]
 
 test:2;
+.qinfra.lsg[]
 .qinfra.clear[]; // clean up all global variables
+.qinfra.lsn[]
 
 // test host.q
 .qr.host[]
