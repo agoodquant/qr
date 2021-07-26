@@ -33,4 +33,4 @@
 
  License
  ===========
- [MIT](https://github.com/agoodquant/qr/edit/master/LICENSE)
+ [MIT](https://github.com/agoodquant/qr/blob/master/LICENSE)
