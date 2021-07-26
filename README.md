@@ -2,7 +2,7 @@
 
  Prerequisite
  ===========
- qinfra: https://github.com/agoodquant/qinfra
+ [qinfra](https://github.com/agoodquant/qinfra)
  
  Dependency
  ===========
@@ -30,3 +30,7 @@
  Disclaimer
  ===========
  This is still in progress. As some functions are vectorized while others are not. Use upon your own judgement.
+
+ License
+ ===========
+ [MIT](https://github.com/agoodquant/qr/edit/master/LICENSE)
