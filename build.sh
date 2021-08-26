@@ -48,6 +48,6 @@ done
 DepQ=$(find $BuildDir -name "depends.txt" )
 for dep in $DepQ
 do
-    echo "sed -i 's%Q:%$BuildDir%g' $dep"
-    sed -i 's%Q:%'$BuildDir'%g' $dep
+    echo "sed -i 's%Q:/$Module%$BuildDir%g' $dep"
+    sed -i 's%Q:/'$Module'%'$BuildDir'%g' $dep
 done

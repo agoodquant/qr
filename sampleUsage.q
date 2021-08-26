@@ -1,7 +1,7 @@
 // dependency
 .qinfra.cleanDep[];
-.qinfra.loadDep[`env;"Q:/qr/env"];
-.qinfra.loadDep[`quant;"Q:/qr/quant"];
+.qinfra.loadDep[`env;"/home/dicentralizedpepe/dist/qr/env"];
+.qinfra.loadDep[`quant;"/home/dicentralizedpepe/dist/qr/quant"];
 .qinfra.listDep[]
 
 // load project
